@@ -1,2 +1,2 @@
 # gfish
-big data schedule
+job schedule framework developed by go!
