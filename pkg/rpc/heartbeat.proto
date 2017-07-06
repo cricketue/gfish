@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+package cockroach.rpc;
+option go_package = "rpc";
+
+import "gogoproto/gogo.proto";
+
+
+
+message RemoteOffset {
+  option (gogoproto.goproto_stringer) = false;
+
+  optional int64 offset = 1 [(gogoproto.nullable) = false];
+  optional int64 uncertainty = 2 [(gogoproto.nullable) = false];
+  optional int64 measured_at = 3 [(gogoproto.nullable) = false];
+}
+
+
+message PingRequest {
+  optional string ping = 1 [(gogoproto.nullable) = false];
+  optional RemoteOffset offset = 2 [(gogoproto.nullable) = false];
+  optional string addr = 3 [(gogoproto.nullable) = false];
+  optional int64 max_offset_nanos = 4 [(gogoproto.nullable) = false];
+}
+
+
+sage PingResponse {
+  optional string pong = 1 [(gogoproto.nullable) = false];
+  optional int64 server_time = 2 [(gogoproto.nullable) = false];
+}
+
+
+
+service Heartbeat{
+  rpc Ping (PingRequest) retrun {PingResponse}{}
+}

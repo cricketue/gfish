@@ -19,8 +19,4 @@ func NewServer() (*server,error){
   s := &Server{
      mux:  http.NewServeMux(),
   }
-
-  g.
-
-
 }
